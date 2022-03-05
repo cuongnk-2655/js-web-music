@@ -6,6 +6,8 @@ button {
   width: 50px;
   margin-left: auto;
   background-color: #f1f3f4;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 
 button:focus {
@@ -173,4 +175,16 @@ button:focus {
   -ms-transform: translateY(0px);
   -o-transform: translateY(0px);
   transform: translateY(0px); */
+}
+
+#background-image {
+  height: 600px !important;
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
 }
