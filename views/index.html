@@ -34,7 +34,6 @@
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
       </nav>
@@ -46,23 +45,7 @@
           <div class="col-2 bg-primary">
           </div>
           <div class="col-8 bg-light">
-            <img src="../assets/image/bg.jpg" alt="" class="w-100 h-75">
-            <audio src="../assets/file/They-Said-Touliver-Binz.mp3"></audio>
-            <input type="range" class="timeline" max="100" value="0">
-            <center>
-              <div class="group-button-action mt-3" style="position: relative">
-                <button><i class="bi bi-skip-backward-circle-fill" style="font-size: 35px;"></i></button>
-                <button><i class="bi bi-arrow-left-short" style="font-size: 35px;"></i></button>
-                <button id="btn-play-music" data-status="pause"><i class="bi bi-play-circle" style="font-size: 35px"></i></button>
-                <button><i class="bi bi-arrow-right-short" style="font-size: 35px;"></i></button>
-                <button><i class="bi bi-skip-forward-circle-fill" style="font-size: 35px;"></i></button>
-                <button><i class="bi bi-volume-mute-fill" style="font-size: 35px;"></i></button>
-                <button class="btn-vulumn" style="position: relative;">
-                  <i class="bi bi-volume-up-fill" style="font-size: 35px;"></i>
-                  <div class="tooltip"><input type="range" class="timeline" max="100" value="0"></div>
-                </button>
-              </div>
-            </center>
+            <img src="../assets/image/bg.jpg" alt=""  id="background-image">
           </div>
           <div class="col-2 bg-primary">
           </div>
@@ -70,26 +53,53 @@
       </div>
     <!-- <main></main> -->
 
-    <!-- <footer></footer> -->
-      <div class="container-fluid my-5">
+    <!-- GROUP BUTTON HANDLE PLAY MUSIC -->
+    <footer>
+      <div class="container-fluid mt-3 mb-3">
+        <audio src="../assets/file/They-Said-Touliver-Binz.mp3"></audio>
+        <input type="range" class="timeline" max="100" value="0" style="position: absolute; top: 0;">
+        <div class="row">
+          <div class="col-4 show-music-in-small">
+            <img src="../assets/image/bg.jpg" alt="" height="70%" width="30%">
+          </div>
+          <div class="col-4">
+            <center>
+              <button id="btn-shuffle-song"><i class="bi bi-shuffle" style="font-size: 28px;"></i></button>
+              <button id="btn-pre-song"><i class="bi bi-arrow-left-short" style="font-size: 28px;"></i></button>
+              <button id="btn-play-music"><i class="bi bi-play-circle" style="font-size: 28px"></i></button>
+              <button id="btn-next-song"><i class="bi bi-arrow-right-short" style="font-size: 28px;"></i></button>
+              <button id="btn-repeat"><i class="bi bi-arrow-repeat" style="font-size: 28px;"></i></button>
+            </center>
+          </div>
+          <div class="col-4">
+            <button class="btn-volumn" style="position: relative;">
+              <i class="bi bi-volume-up-fill btn-volumn-m" style="font-size: 28px;"></i>
+              <div class="tooltip">
+                <output style="position:absolute;" id="myValue"></output>
+                <input type="range" id="volunm-range" min="0" max="100" value="100">
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- GROUP BUTTON HANDLE PLAY MUSIC -->
 
-        <!-- Footer -->
+    <!-- <footer></footer> -->
+      <!-- <div class="container-fluid my-5">
+
         <footer
                 class="text-center text-lg-start text-white"
                 style="background-color: #1c2331"
                 >
-          <!-- Section: Social media -->
           <section
                   class="d-flex justify-content-between p-4"
                   style="background-color: #6351ce"
                   >
-            <!-- Left -->
             <div class="me-5">
               <span>Get connected with us on social networks:</span>
             </div>
-            <!-- Left -->
 
-            <!-- Right -->
             <div>
               <a href="" class="text-white me-4">
                 <i class="fab fa-facebook-f"></i>
@@ -110,18 +120,12 @@
                 <i class="fab fa-github"></i>
               </a>
             </div>
-            <!-- Right -->
           </section>
-          <!-- Section: Social media -->
 
-          <!-- Section: Links  -->
           <section class="">
             <div class="container text-center text-md-start mt-5">
-              <!-- Grid row -->
               <div class="row mt-3">
-                <!-- Grid column -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                  <!-- Content -->
                   <h6 class="text-uppercase fw-bold">Company name</h6>
                   <hr
                       class="mb-4 mt-0 d-inline-block mx-auto"
@@ -133,11 +137,8 @@
                     elit.
                   </p>
                 </div>
-                <!-- Grid column -->
 
-                <!-- Grid column -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                  <!-- Links -->
                   <h6 class="text-uppercase fw-bold">Products</h6>
                   <hr
                       class="mb-4 mt-0 d-inline-block mx-auto"
@@ -156,11 +157,8 @@
                     <a href="#!" class="text-white">Bootstrap Angular</a>
                   </p>
                 </div>
-                <!-- Grid column -->
 
-                <!-- Grid column -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                  <!-- Links -->
                   <h6 class="text-uppercase fw-bold">Useful links</h6>
                   <hr
                       class="mb-4 mt-0 d-inline-block mx-auto"
@@ -179,11 +177,8 @@
                     <a href="#!" class="text-white">Help</a>
                   </p>
                 </div>
-                <!-- Grid column -->
 
-                <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                  <!-- Links -->
                   <h6 class="text-uppercase fw-bold">Contact</h6>
                   <hr
                       class="mb-4 mt-0 d-inline-block mx-auto"
@@ -194,14 +189,10 @@
                   <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
                   <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
                 </div>
-                <!-- Grid column -->
               </div>
-              <!-- Grid row -->
             </div>
           </section>
-          <!-- Section: Links  -->
 
-          <!-- Copyright -->
           <div
               class="text-center p-3"
               style="background-color: rgba(0, 0, 0, 0.2)"
@@ -211,11 +202,9 @@
               >MDBootstrap.com</a
               >
           </div>
-          <!-- Copyright -->
         </footer>
-        <!-- Footer -->
 
-      </div>
+      </div> -->
     <!-- <footer></footer> -->
 
     <!-- Optional JavaScript -->
