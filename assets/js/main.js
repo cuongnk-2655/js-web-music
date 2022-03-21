@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-  const playBtn = document.querySelector('#btn-play-music');
   const audio = document.querySelector('audio');
   const timeline = document.querySelector('.timeline');
   const soundButton = document.querySelector('#sound-button');
 
+  const playBtn = document.querySelector('#btn-play-music');
   playBtn.addEventListener('click', function() {
     const isPause = audio.paused;
     const icon = isPause ? 'pause' : 'play-circle';
@@ -17,24 +17,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+  const timeline = document.querySelector('.timeline');
   audio.ontimeupdate = changeTimelinePosition;
   function changeTimelinePosition () {
     const percentagePosition = (100*audio.currentTime) / audio.duration;
     timeline.style.backgroundSize = `${percentagePosition}% 100%`;
     timeline.value = percentagePosition;
   }
-
   timeline.addEventListener('change', changeSeek);
   function changeSeek () {
     const time = (timeline.value * audio.duration) / 100;
     audio.currentTime = time;
   }
 
-  // audio.onended = endSong;
-  // function endSong() {
-  //   playBtn.innerHTML = '<i class="bi bi-play-circle" style="font-size: 28px"></i>';
-  // };
-
+  const myRange = document.querySelector('#volunm-range');
+  const myValue = document.querySelector('#myValue');
   var off = (myRange.clientWidth) / (parseInt(myRange.max) - parseInt(myRange.min));
   var px = ((myRange.valueAsNumber - parseInt(myRange.min)) * off) - (myValue.clientWidth / 2);
   myValue.style.left = px + 'px';
@@ -44,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
     myValue.style.left = px + 'px';
     audio.volume = myRange.value * 0.01;
   };
-
   myRange.addEventListener('click', function() {
     if ((this).value == 0) {
       audio.muted = !audio.muted;
@@ -59,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
     element.classList.add(`bi-volume-${changeIcon}-fill`);
   }
 
+  const iconVolumn = document.querySelector('.btn-volumn-m');
   iconVolumn.addEventListener('click', function () {
     audio.muted = !audio.muted;
     if (audio.muted) {
@@ -72,47 +69,88 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   const prePathFile = 'http://127.0.0.1:5500/assets/file/';
+  const prePathImange = 'http://127.0.0.1:5500/assets/image/';
   var arrSong = [
-    `${prePathFile}Chay-Ve-Khoc-Voi-Anh-ERIK.mp3`,
-    `${prePathFile}They-Said-Touliver-Binz.mp3`,
-    `${prePathFile}25-Tao-Sol-Bass-Young-H.mp3`,
+    {
+      src: `${prePathFile}They-Said-Touliver-Binz.mp3`,
+      image: `${prePathImange}bg.jpg`,
+      name: "They said",
+      singer: "Binz"
+    },
+    {
+      src: `${prePathFile}25-Tao-Sol-Bass-Young-H.mp3`,
+      image: `${prePathImange}25.png`,
+      name: "25",
+      singer: "Táo"
+    },
+    {
+      src: `${prePathFile}Hen-Mot-Mai-4-Nam-2-Chang-1-Tinh-Yeu-OST-Bui-Anh-Tuan.mp3`,
+      image: `${prePathImange}bbb.png`,
+      name: "Hẹn một mai",
+      singer: "Bùi Anh Tuấn"
+    },
   ];
-  const prePathImange = 'http://127.0.0.1:5500/assets/image/'
-  var arrImage = [
-    `${prePathImange}erik.png`,
-    `${prePathImange}bg.jpg`,
-    `${prePathImange}25.png`,
-  ];
-  const bgImage = document.querySelector('#background-image');
 
+  const nextSong = document.querySelector('#btn-next-song');
   nextSong.addEventListener('click', function () {
-    changeSong();
+    next_song();
+    $('.image-song').slick('slickNext');
   });
 
+  const preSong = document.querySelector('#btn-pre-song');
   preSong.addEventListener('click', function () {
-    changeSong();
+    pre_song();
+    $('.image-song').slick('slickPrev');
   });
+
+  const bgImage = document.querySelector('#background-image');
+  const nameSong = document.querySelector('.name-song');
+  const namsSinger = document.querySelector('.name-singer');
+  const imgSmall = document.querySelector('.img-small');
 
   var temp = 0;
-  function changeSong() {
-    const currentSrc = audio.src;
+  function next_song() {
     const totalSong = arrSong.length - 1;
-    if (temp != 0) {
-      temp += 1
-      audio.src = arrSong[temp];
-      bgImage.src = arrImage[temp];
-    }
+    
     if (temp == 0) {
+      temp = 1
+      handleChangeSong();
+    } else if (temp != 0) {
       temp += 1
-      audio.src = arrSong[temp];
-      bgImage.src = arrImage[temp];
+      if (temp > totalSong) {
+        temp = 0
+        handleChangeSong();
+      } else {
+        handleChangeSong();
+      }
     }
-    if (temp > totalSong) {
-      temp = 0
-      audio.src = arrSong[temp];
-      bgImage.src = arrImage[temp];
-    }
+    playBtn.innerHTML = `<i class="bi bi-pause" style="font-size: 28px"></i>`;
     audio.play();
+  }
+  function pre_song() {
+    const totalSong = arrSong.length - 1;
+    
+    if (temp == 0) {
+      temp = totalSong
+      handleChangeSong();
+    } else if (temp != 0) {
+      temp -= 1
+      if (temp > totalSong) {
+        temp = 0
+        handleChangeSong();
+      } else {
+        handleChangeSong();
+      }
+    }
+    playBtn.innerHTML = `<i class="bi bi-pause" style="font-size: 28px"></i>`;
+    audio.play();
+  }
+  function handleChangeSong(params) {
+    audio.src = arrSong[temp].src;
+    bgImage.src = arrSong[temp].image;
+    nameSong.textContent = arrSong[temp].name;
+    namsSinger.textContent = arrSong[temp].singer;
+    imgSmall.src = arrSong[temp].image;
   }
 
   const btnShuffle = document.querySelector('#btn-shuffle-song');
@@ -121,8 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
     var randNumber = Math.floor(Math.random() * 3)
     arrSong.sort((a, b) => 0.5 - Math.random());
 
-    audio.src = arrSong[randNumber];
-    bgImage.src = arrImage[randNumber];
+    audio.src = arrSong[randNumber].src;
+    bgImage.src = arrSong[randNumber].image;
+    playBtn.innerHTML = `<i class="bi bi-pause" style="font-size: 28px"></i>`;
     audio.play();
   });
 
@@ -130,6 +169,11 @@ document.addEventListener("DOMContentLoaded", function() {
   var repeatSong = false;
   btnRepeat.addEventListener('click', function () {
     repeatSong = !repeatSong;
+    if (repeatSong) {
+      this.style.backgroundColor = "red";
+    } else {
+      this.style.backgroundColor = "#f1f3f4"
+    }
   });
 
   audio.onended = repeatOrStop;
@@ -141,4 +185,21 @@ document.addEventListener("DOMContentLoaded", function() {
       playBtn.innerHTML = '<i class="bi bi-play-circle" style="font-size: 28px"></i>';
     }
   }
+
+  $('.image-song').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.playlist-song'
+  });
+  $('.playlist-song').slick({
+    slidesToShow: 2,
+    lazyLoad: 'ondemand',
+    slidesToScroll: 1,
+    asNavFor: '.image-song',
+    centerMode: true,
+    focusOnSelect: true,
+    arrows: false
+  });
 });

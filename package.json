@@ -7,7 +7,9 @@
   "description": "install webpack to project npm install webpack --save-dev",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "amplitude-js": "^8.17.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.3",
